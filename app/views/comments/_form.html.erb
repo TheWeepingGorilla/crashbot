@@ -1,3 +1,12 @@
+<% if @comment.errors.any? %>
+  <h3>Please fix these errors:</h3>
+  <ul>
+    <% @comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for(@comment) do |f| %>
   <div class="form-group">
     <%= f.hidden_field :referring_link_id, :value => @referring_link_id %>

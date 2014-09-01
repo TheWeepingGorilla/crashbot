@@ -21,7 +21,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-
     @comment = Comment.new(comment_params)
     link = Link.find(params[:referring_link_id]) if params[:referring_link_id]
     referring_comment = Comment.find(params[:referring_comment_id]) if params[:referring_comment_id]
@@ -33,14 +32,6 @@ class CommentsController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
-  def edit
-    @comment = Comment.find(params[:id])
   end
 
   def update
