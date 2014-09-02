@@ -27,18 +27,16 @@ class CommentsController < ApplicationController
     if @comment.save
       link.comments << @comment if params[:referring_link_id]
       @comment.comments << referring_comment if params[:referring_comment_id]
-      flash[:notice] = "Comment created."
-      redirect_to links_path
+      redirect_to links_path, notice: "Comment created."
     else
-      render 'new'
+      redirect_to root_url, alert: "Comment cannot be blank."
     end
   end
 
   def update
     @comment = Comment.find(comment_params)
     if @comment.update(params[:comment])
-      flash[:notice] = "Comment updated."
-      redirect_to links_path
+      redirect_to links_path, notice: "Comment updated."
     else
       render 'edit'
     end
@@ -47,8 +45,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    flash[:notice] = "Comment deleted."
-    redirect_to links_path
+    redirect_to links_path, notice: "Comment deleted."
   end
 
   private
